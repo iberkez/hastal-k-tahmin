@@ -1,1 +1,1 @@
-# hastal-k-tahmin
+# hastalık-tahmin
