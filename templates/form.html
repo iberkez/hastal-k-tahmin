@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Hastalık Tahmini</title>
+  <style>
+    body { background: #1c1c2f; color: #fff; font-family: sans-serif; padding: 30px; }
+    .form-box { background: #2a2a3b; padding: 30px; max-width: 550px; margin: auto; border-radius: 10px; }
+    label { display: block; margin-bottom: 10px; }
+    input[type="checkbox"], select, input[type="number"] { margin-right: 6px; }
+    button { background: #0bc267; color: white; padding: 10px 20px; border: none; font-weight: bold; margin-top: 15px; cursor: pointer; }
+    .sonuc { margin-top: 30px; font-size: 1.1em; color: #0bc267; }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <h2>🧠 Belirtileri Seç</h2>
+  <form method="post">
+    {% for belirti in belirt_listesi %}
+      <label><input type="checkbox" name="{{ belirti }}" value="1"> {{ belirti.replace('_',' ').capitalize() }}</label>
+    {% endfor %}
+
+    <hr>
+    <label>Yaş: <input type="number" name="yas" required></label>
+    <label>Cinsiyet: 
+      <select name="cinsiyet" required>
+        <option value="erkek">Erkek</option>
+        <option value="kadın">Kadın</option>
+      </select>
+    </label>
+    <label>Belirti süresi (gün): <input type="number" name="sure" required></label>
+
+    <button type="submit">Tahmin Et</button>
+  </form>
+
+  {% if sonuc %}
+    <div class="sonuc">
+      ⚕️ Tahmin: <strong>{{ sonuc }}</strong><br><br>
+      <u>Etkin Belirtiler ve Bilgiler:</u>
+      <ul>
+        {% for n in nedenler %}
+          <li>{{ n }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>
+
+</body>
+</html>
