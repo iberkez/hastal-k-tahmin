@@ -1,0 +1,1 @@
+# hastalık-tahmin
